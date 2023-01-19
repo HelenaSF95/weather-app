@@ -5,14 +5,17 @@ function implementWeather(response) {
   document.querySelector("#current-temp").innerHTML = Math.round(
     response.data.main.temp
   );
-  document.querySelector("#description").innerHTML =
-    response.data.weather[0].description;
+
   document.querySelector("#windspeed").innerHTML = Math.round(
     response.data.wind.speed
   );
   document.querySelector("#humidity").innerHTML = Math.round(
     response.data.main.humidity
   );
+
+  let weatherDescription = response.data.weather[0].description;
+  document.querySelector("#description").innerHTML =
+    weatherDescription.charAt(0).toUpperCase() + weatherDescription.slice(1);
 }
 
 function searchCity(city) {
