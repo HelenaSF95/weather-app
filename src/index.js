@@ -39,7 +39,7 @@ function obtainSummitedCity(event) {
   let city = document.querySelector("#search-city-text").value;
   console.log(city);
 
-  searchCity();
+  searchCity(city);
 }
 
 function getCurrentLocation(event) {
