@@ -44,8 +44,7 @@ function searchCurrentLocation(position) {
 
 function getCurrentLocation(event) {
   event.preventDefault();
-
-  navigator.geolocation.getCurrentPosition(searchLocation);
+  console.log(navigator.geolocation.getCurrentPosition(searchCurrentLocation));
 }
 
 let searchButton = document.querySelector("#search-form");
