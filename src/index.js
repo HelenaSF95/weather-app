@@ -9,13 +9,8 @@ function implementWeather(response) {
   document.querySelector("#humidity").innerHTML = Math.round(
     response.data.main.humidity
   );
-
-  let weatherDescription = response.data.weather[0].description;
-  console.log(weatherDescription);
-
-  document.querySelector("#description").innerHTML = `${weatherDescription
-    .charAt(0)
-    .toUpperCase()} + ${weatherDescription.slice(1)}`;
+  document.querySelector("#description").innerHTML =
+    response.data.weather[0].description;
 }
 
 function searchCity(city) {
