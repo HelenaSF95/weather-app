@@ -52,6 +52,7 @@ let searchButton = document.querySelector("#search-form");
 searchButton.addEventListener("submit", searchCity);
 
 let currentButton = document.querySelector("#location-btn");
+console.log(currentButton);
 currentButton.addEventListener("click", getCurrentLocation);
 
 function formatDate(date) {
