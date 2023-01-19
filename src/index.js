@@ -11,6 +11,7 @@ function implementWeather(response) {
   );
 
   let weatherDescription = response.data.weather[0].description;
+  console.log(weatherDescription);
 
   document.querySelector("#description").innerHTML = `${weatherDescription
     .charAt(0)
