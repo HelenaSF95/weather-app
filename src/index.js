@@ -5,13 +5,11 @@ function fetchCityTemp(response) {
     weatherDescription.charAt(0).toUpperCase() + weatherDescription.slice(1);
   let wind = Math.round(response.data.wind.speed);
   let humidity = Math.round(response.data.main.humidity);
-  console.log(response.data.main.humidity);
 
   let tempCel = document.querySelector("#current-temp");
   let currentDescription = document.querySelector("#description");
   let currentWindspeed = document.querySelector("#windspeed");
   let currentHumidity = document.querySelector("#humidity");
-  console.log(currentHumidity);
 
   tempCel.innerHTML = `Currently ${cityTempCel}`;
   currentDescription.innerHTML = `${descriptionText}`;
