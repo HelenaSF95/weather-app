@@ -87,3 +87,5 @@ function showCelcius(event) {
 
 let celciusTemp = document.querySelector("#temp-unit-celcius");
 celciusTemp.addEventListener("click", showCelcius);
+
+searchCity("London");
