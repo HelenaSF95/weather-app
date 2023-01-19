@@ -18,7 +18,7 @@ function fetchCityTemp(response) {
 function searchCity(city) {
   let units = `metric`;
   let apiKey = `3f6be1c407b0d9d1933561808db358ba`;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&appid=${apiKey}&&units=${units}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&&units=${units}`;
 
   axios.get(apiUrl).then(fetchCityTemp);
 }
