@@ -1,34 +1,26 @@
 function fetchCityTemp(response) {
-  let cityTempCel = Math.round(response.data.main.temp);
-  let weatherDescription = response.data.weather[0].description;
-  let descriptionText =
-    weatherDescription.charAt(0).toUpperCase() + weatherDescription.slice(1);
-  let wind = Math.round(response.data.wind.speed);
-  let humidity = Math.round(response.data.main.humidity);
+  console.log(response);
 
-  let tempCel = document.querySelector("#current-temp");
-  let currentDescription = document.querySelector("#description");
-  let currentWindspeed = document.querySelector("#windspeed");
-  let currentHumidity = document.querySelector("#humidity");
-
-  tempCel.innerHTML = `Currently ${cityTempCel}`;
-  currentDescription.innerHTML = `${descriptionText}`;
-  currentWindspeed.innerHTML = `${wind} km/h`;
-  currentHumidity.innerHTML = `${humidity} %`;
+  document.querySelector("#city").innerHTML = response.data.name;
+  document.querySelector("#current-temp").innerHTML = Math.round(
+    response.data.main.temp
+  );
+  document.querySelector("#description").innerHTML =
+    response.data.weather[0].description;
+  document.querySelector("#windspeed").innerHTML = Math.round(
+    response.data.wind.speed
+  );
+  document.querySelector("#humidity").innerHTML = Math.round(
+    response.data.main.humidity
+  );
 }
 
-function searchCity(event) {
-  event.preventDefault();
-  let city = document.querySelector("#search-city-text");
-
+function searchCity(city) {
   let units = `metric`;
   let apiKey = `3f6be1c407b0d9d1933561808db358ba`;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&appid=${apiKey}&&units=${units}`;
 
   axios.get(apiUrl).then(fetchCityTemp);
-
-  let cityName = document.querySelector("#city");
-  cityName.innerHTML = city.value;
 }
 
 function searchCurrentLocation(position) {
@@ -42,13 +34,20 @@ function searchCurrentLocation(position) {
   axios.get(apiUrl).then(fetchCityTemp);
 }
 
+function obtainSummitedCity(event) {
+  event.preventDefault();
+  let city = document.querySelector("#search-city-text").value;
+
+  searchCity();
+}
+
 function getCurrentLocation(event) {
   event.preventDefault();
   console.log(navigator.geolocation.getCurrentPosition(searchCurrentLocation));
 }
 
 let searchButton = document.querySelector("#search-form");
-searchButton.addEventListener("submit", searchCity);
+searchButton.addEventListener("submit", obtainSummitedCity);
 
 let currentButton = document.querySelector("#location-btn");
 console.log(currentButton);
