@@ -1,4 +1,4 @@
-function fetchCurrentTemp(response) {
+function fetchCityTemp(response) {
   let cityTempCel = Math.round(response.data.main.temp);
   let weatherDescription = response.data.weather[0].description;
   let descriptionText =
@@ -19,22 +19,42 @@ function fetchCurrentTemp(response) {
   currentHumidity.innerHTML = `${humidity} %`;
 }
 
-function updateCity(event) {
+function searchCity(event) {
   event.preventDefault();
-  let searchedCity = document.querySelector("#search-city-text");
+  let city = document.querySelector("#search-city-text");
 
   let units = `metric`;
   let apiKey = `3f6be1c407b0d9d1933561808db358ba`;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchedCity.value}&appid=${apiKey}&&units=${units}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&appid=${apiKey}&&units=${units}`;
 
-  axios.get(apiUrl).then(fetchCurrentTemp);
+  axios.get(apiUrl).then(fetchCityTemp);
 
-  let cityHeader = document.querySelector("#city");
-  cityHeader.innerHTML = searchedCity.value;
+  let cityName = document.querySelector("#city");
+  cityName.innerHTML = city.value;
 }
 
-let test = document.querySelector("#search-form");
-test.addEventListener("submit", updateCity);
+function searchCurrentLocation(position) {
+  console.log(position.coords.latitude);
+  console.log(position.coords.longitude);
+
+  let units = `metric`;
+  let apiKey = `3f6be1c407b0d9d1933561808db358ba`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}`;
+
+  axios.get(apiUrl).then(fetchCityTemp);
+}
+
+function getCurrentLocation(event) {
+  event.preventDefault();
+
+  navigator.geolocation.getCurrentPosition(searchLocation);
+}
+
+let searchButton = document.querySelector("#search-form");
+searchButton.addEventListener("submit", updateCity);
+
+let currentButton = document.querySelector("#current-btn");
+currentButton.addEventListener("click", getCurrentLocation);
 
 function formatDate(date) {
   let weekdays = [
