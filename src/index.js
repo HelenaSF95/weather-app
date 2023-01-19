@@ -1,11 +1,8 @@
 function implementWeather(response) {
-  console.log(response);
-
   document.querySelector("#city").innerHTML = response.data.name;
   document.querySelector("#current-temp").innerHTML = Math.round(
     response.data.main.temp
   );
-
   document.querySelector("#windspeed").innerHTML = Math.round(
     response.data.wind.speed
   );
@@ -14,8 +11,10 @@ function implementWeather(response) {
   );
 
   let weatherDescription = response.data.weather[0].description;
-  document.querySelector("#description").innerHTML =
-    weatherDescription.charAt(0).toUpperCase() + weatherDescription.slice(1);
+
+  document.querySelector("#description").innerHTML = `${weatherDescription
+    .charAt(0)
+    .toUpperCase()} + ${weatherDescription.slice(1)}`;
 }
 
 function searchCity(city) {
