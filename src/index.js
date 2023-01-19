@@ -1,6 +1,6 @@
 function implementWeather(response) {
   document.querySelector("#city").innerHTML = response.data.name;
-  document.querySelector("#current-temp").innerHTML = Math.round(
+  document.querySelector("#pseudo-temp").innerHTML = Math.round(
     response.data.main.temp
   );
   document.querySelector("#windspeed").innerHTML = Math.round(
