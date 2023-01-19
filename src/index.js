@@ -1,4 +1,4 @@
-function fetchCityTemp(response) {
+function implementWeather(response) {
   console.log(response);
 
   document.querySelector("#city").innerHTML = response.data.name;
@@ -20,38 +20,33 @@ function searchCity(city) {
   let apiKey = `3f6be1c407b0d9d1933561808db358ba`;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&&units=${units}`;
 
-  axios.get(apiUrl).then(fetchCityTemp);
+  axios.get(apiUrl).then(implementWeather);
 }
 
 function searchCurrentLocation(position) {
-  console.log(position.coords.latitude);
-  console.log(position.coords.longitude);
-
   let units = `metric`;
   let apiKey = `3f6be1c407b0d9d1933561808db358ba`;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&&units=${units}`;
 
-  axios.get(apiUrl).then(fetchCityTemp);
+  axios.get(apiUrl).then(implementWeather);
 }
 
 function obtainSummitedCity(event) {
   event.preventDefault();
   let city = document.querySelector("#search-city-text").value;
-  console.log(city);
 
   searchCity(city);
 }
 
 function getCurrentLocation(event) {
   event.preventDefault();
-  console.log(navigator.geolocation.getCurrentPosition(searchCurrentLocation));
+  navigator.geolocation.getCurrentPosition(searchCurrentLocation);
 }
 
 let searchButton = document.querySelector("#search-form");
 searchButton.addEventListener("submit", obtainSummitedCity);
 
 let currentButton = document.querySelector("#location-btn");
-console.log(currentButton);
 currentButton.addEventListener("click", getCurrentLocation);
 
 function formatDate(date) {
