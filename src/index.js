@@ -1,31 +1,68 @@
+function displayDate(timestamp) {
+  let date = new Date(timestamp);
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tueday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let day = days[date.getDay()];
+  let hour = date.getHours();
+  let minutes = date.getMinutes();
+  let timeFormat = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09"];
+
+  if (hour <= 9) {
+    hour = timeFormat[hour];
+  }
+  if (minutes <= 9) {
+    minutes = timeFormat[minutes];
+  }
+
+  let time = `${hour}:${minutes}`;
+
+  let currentTime = document.querySelector("#date-time");
+  currentTime.innerHTML = time;
+
+  let currentDay = document.querySelector("#currentdate");
+  currentDay.innerHTML = `${day}`;
+}
+
 function implementWeather(response) {
-  document.querySelector("#city").innerHTML = response.data.name;
+  console.log(response.data);
+  document.querySelector("#city").innerHTML = response.data.city;
   document.querySelector("#pseudo-temp").innerHTML = Math.round(
-    response.data.main.temp
+    response.data.temperature.current
   );
   document.querySelector("#windspeed").innerHTML = Math.round(
     response.data.wind.speed
   );
   document.querySelector("#humidity").innerHTML = Math.round(
-    response.data.main.humidity
+    response.data.temperature.humidity
   );
-  let description = response.data.weather[0].description;
+  let description = response.data.condition.description;
 
   document.querySelector("#description").innerHTML =
     description.charAt(0).toUpperCase() + description.slice(1);
+
+  displayDate(response.data.time * 1000);
 }
 
 function searchCity(city) {
   let units = `metric`;
-  let apiKey = `3f6be1c407b0d9d1933561808db358ba`;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&&units=${units}`;
+  let apiKey = `abodftdf7899f82673d6451a0b0db4af`;
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(implementWeather);
+
+  console.log(apiUrl);
 }
 
 function searchCurrentLocation(position) {
   let units = `metric`;
-  let apiKey = `3f6be1c407b0d9d1933561808db358ba`;
+  let apiKey = `abodftdf7899f82673d6451a0b0db4af`;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&&units=${units}`;
 
   axios.get(apiUrl).then(implementWeather);
@@ -48,44 +85,5 @@ searchButton.addEventListener("submit", obtainSummitedCity);
 
 let currentButton = document.querySelector("#location-btn");
 currentButton.addEventListener("click", getCurrentLocation);
-
-function formatDate(date) {
-  let weekdays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-
-  let currentDay = weekdays[date.getDay()];
-  let currentHour = date.getHours();
-  let currentMin = date.getMinutes();
-  let timeFormat = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09"];
-
-  if (currentHour <= 9) {
-    currentHour = timeFormat[currentHour];
-  }
-  if (currentMin <= 9) {
-    currentMin = timeFormat[currentMin];
-  }
-
-  let sentence = `${currentDay} ${currentHour}:${currentMin}`;
-  return sentence;
-}
-
-let currentDate = document.querySelector("#current-date");
-currentDate.innerHTML = `${formatDate(new Date())} ⛈`;
-
-function showCelcius(event) {
-  event.preventDefault();
-  let temp = document.querySelector("#current-temp");
-  temp.innerHTML = `Currently 19`;
-}
-
-let celciusTemp = document.querySelector("#temp-unit-celcius");
-celciusTemp.addEventListener("click", showCelcius);
 
 searchCity("Brisbane");

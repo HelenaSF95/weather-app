@@ -24,78 +24,67 @@
   </head>
   <body>
     <div class="container text-center">
-      <div class="my-container">
-        <div class="row">
-          <div class="col-12">
-            <div class="first header" id="city"></div>
-          </div>
-          <div class="col-12">
-            <div class="second header">
-              Currently
-              <span id="pseudo-temp"></span
-              ><a href="#" class="link" id="temp-unit-celcius">°C</a>
+      <div class="weather-app">
+        <div class="my-container">
+          <div class="row">
+            <div class="col-12">
+              <div class="first header" id="city"></div>
             </div>
-            <div class="wind-hum-descrip">
-              <span id="description"></span> Wind:
-              <span id="windspeed"></span> km/h Humidity:
-              <span id="humidity"></span> %
+            <div class="col-12">
+              <div class="second header">
+                Currently
+                <span id="pseudo-temp"></span>°C
+              </div>
+              <div class="">Last updated: <span id="date-time"></span></div>
+              <div class="wind-hum-descrip">
+                <span id="description"></span> Wind:
+                <span id="windspeed"></span> km/h Humidity:
+                <span id="humidity"></span> %
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="search">
+                <form action="submit" id="search-form">
+                  <div class="input-group input-group-sm mb-3">
+                    <input
+                      type="text"
+                      id="search-city-text"
+                      class="form-control"
+                      placeholder="Find your city..."
+                    />
+                    <button
+                      class="btn btn-outline-secondary"
+                      id="search-btn"
+                      type="submit"
+                    >
+                      Search
+                    </button>
+                    <button
+                      class="btn btn-outline-secondary"
+                      id="location-btn"
+                      type="button"
+                    >
+                      Current
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
-          <div class="col-12">
-            <div class="search">
-              <form action="submit" id="search-form">
-                <div class="input-group input-group-sm mb-3">
-                  <input
-                    type="text"
-                    id="search-city-text"
-                    class="form-control"
-                    placeholder="Find your city..."
-                  />
-                  <button
-                    class="btn btn-outline-secondary"
-                    id="search-btn"
-                    type="submit"
-                  >
-                    Search
-                  </button>
-                  <button
-                    class="btn btn-outline-secondary"
-                    id="location-btn"
-                    type="button"
-                  >
-                    Current
-                  </button>
-                </div>
-              </form>
+          <div class="row">
+            <div class="col-2">
+              <span class="todays-weather" id="current-date">Sun</span>
             </div>
           </div>
         </div>
-        <div class="row justify-content-start">
-          <div class="col-4 date-forecast">
-            <span class="todays-weather" id="current-date">Today 🌧</span>
-          </div>
-          <div class="col-4 date-forecast" id="tomorrow">Tomorrow ❄️</div>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-4 date-forecast">Sunday 🌥</div>
-          <div class="col-4 date-forecast">Monday 🌧</div>
-        </div>
-        <div class="row justify-content-end">
-          <div class="col-4 date-forecast">Tuesday ☁️</div>
-          <div class="col-4 date-forecast">Wednesday 🌨</div>
-        </div>
-        <div class="row align-items-end">
-          <div class="col-12">
-            <span class="credits">
-              <a
-                href="https://github.com/HelenaSF95/weather-app"
-                target="_blank"
-                rel="noopener noreferrer"
-                >Open source code </a
-              >by Helena Sahlholdt Fuglsbjerg
-            </span>
-          </div>
-        </div>
+        <span class="credits">
+          <a
+            href="https://github.com/HelenaSF95/weather-app"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Open source code </a
+          >by Helena Sahlholdt Fuglsbjerg
+        </span>
       </div>
     </div>
     <script src="src/index.js"></script>
