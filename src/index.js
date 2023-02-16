@@ -33,7 +33,7 @@ function displayDate(timestamp) {
 function implementWeather(response) {
   console.log(response.data);
   document.querySelector("#city").innerHTML = response.data.city;
-  document.querySelector("#pseudo-temp").innerHTML = Math.round(
+  document.querySelector("#temp").innerHTML = Math.round(
     response.data.temperature.current
   );
   document.querySelector("#windspeed").innerHTML = Math.round(
@@ -42,10 +42,15 @@ function implementWeather(response) {
   document.querySelector("#humidity").innerHTML = Math.round(
     response.data.temperature.humidity
   );
-  let description = response.data.condition.description;
 
+  let description = response.data.condition.description;
   document.querySelector("#description").innerHTML =
     description.charAt(0).toUpperCase() + description.slice(1);
+  let iconElement = document.querySelector("#temp-icon");
+  iconElement.setAttribute(
+    "src",
+    `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
+  );
 
   displayDate(response.data.time * 1000);
 }
@@ -56,8 +61,6 @@ function searchCity(city) {
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(implementWeather);
-
-  console.log(apiUrl);
 }
 
 function searchCurrentLocation(position) {
